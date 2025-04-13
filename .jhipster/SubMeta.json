@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250412173055"
+  },
+  "applications": ["Gama"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "concluida",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataLimite",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "SubMeta",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "meta",
+      "relationshipName": "meta",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,46 @@
+
+application {
+  config {
+    baseName Gama
+    applicationType monolith
+    packageName com.myapp
+    authenticationType jwt
+    prodDatabaseType postgresql
+    clientFramework angularX
+  }
+  entities Aluno, Meta, SubMeta
+}
+
+entity Aluno {
+  nome String required
+  matricula String required unique
+}
+
+
+entity Meta {
+	valor Integer required min(0) max(1000)
+  area AreaDoEnem required
+}
+
+entity SubMeta {
+  descricao String required
+  concluida Boolean required
+  dataLimite LocalDate required
+}
+
+enum AreaDoEnem {
+	LINGUAGEM,
+  CIENCIAS_HUMANAS,
+  CIENCIAS_DA_NATUREZA,
+  MATEMATICA
+}
+
+relationship ManyToOne {
+  Meta{aluno(matricula)} to Aluno,
+  SubMeta{meta} to Meta
+}
+
+dto Aluno, Meta, SubMeta with mapstruct
+service all with serviceClass
+paginate Aluno, Meta, SubMeta with pagination
+

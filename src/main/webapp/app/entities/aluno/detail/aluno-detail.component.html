@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="aluno() as alunoRef">
+      <h2 data-cy="alunoDetailsHeading"><span>Aluno</span></h2>
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Código</span></dt>
+        <dd>
+          <span>{{ alunoRef.id }}</span>
+        </dd>
+        <dt><span>Nome</span></dt>
+        <dd>
+          <span>{{ alunoRef.nome }}</span>
+        </dd>
+        <dt><span>Matrícula</span></dt>
+        <dd>
+          <span>{{ alunoRef.matricula }}</span>
+        </dd>
+      </dl>
+
+      <!-- Section for displaying Metas -->
+      <h3>Metas</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Área</th>
+            <th>Valor</th>
+            <th>Aluno ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let meta of metas">
+            <td>{{ meta.area }}</td>
+            <td>{{ meta.valor }}</td>
+            <td>{{ meta.aluno?.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
+      </button>
+      <button type="button" [routerLink]="['/aluno', alunoRef.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

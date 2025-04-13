@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sub-meta-heading" data-cy="SubMetaCreateUpdateHeading">Criar ou editar Sub Meta</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let descricaoRef = editForm.get('descricao')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+          @if (descricaoRef.invalid && (descricaoRef.dirty || descricaoRef.touched)) {
+            <div>
+              @if (editForm.get('descricao')?.errors?.required) {
+                <small class="form-text text-danger">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let concluidaRef = editForm.get('concluida')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_concluida">Concluida</label>
+          <input type="checkbox" class="form-check" name="concluida" id="field_concluida" data-cy="concluida" formControlName="concluida" />
+          @if (concluidaRef.invalid && (concluidaRef.dirty || concluidaRef.touched)) {
+            <div>
+              @if (editForm.get('concluida')?.errors?.required) {
+                <small class="form-text text-danger">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dataLimiteRef = editForm.get('dataLimite')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dataLimite">Data Limite</label>
+          <div class="input-group">
+            <input
+              id="field_dataLimite"
+              data-cy="dataLimite"
+              type="text"
+              class="form-control"
+              name="dataLimite"
+              ngbDatepicker
+              #dataLimiteDp="ngbDatepicker"
+              formControlName="dataLimite"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dataLimiteDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (dataLimiteRef.invalid && (dataLimiteRef.dirty || dataLimiteRef.touched)) {
+            <div>
+              @if (editForm.get('dataLimite')?.errors?.required) {
+                <small class="form-text text-danger">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta">Meta</label>
+          <select class="form-control" id="field_meta" data-cy="meta" name="meta" formControlName="meta" [compareWith]="compareMeta">
+            <option [ngValue]="null"></option>
+            @for (metaOption of metasSharedCollection; track $index) {
+              <option [ngValue]="metaOption">{{ metaOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
