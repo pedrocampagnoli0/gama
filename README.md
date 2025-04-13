@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 # Gama
 
 This application was generated using JHipster 8.10.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.10.0](https://www.jhipster.tech/documentation-archive/v8.10.0).
@@ -262,4 +264,9 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Jest]: https://jestjs.io
 [Leaflet]: https://leafletjs.com/
 [DefinitelyTyped]: https://definitelytyped.org/
-[Angular CLI]: https://cli.angular.io/
+
+# [Angular CLI]: https://cli.angular.io/
+
+# gama
+
+> > > > > > > 763d3e818c2deb7b6dc0ecb77dc6f0fb8e441ca3
